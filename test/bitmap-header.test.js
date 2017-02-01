@@ -1,6 +1,8 @@
 const assert = require('assert');
 const fs = require('fs');
 const BitmapHeader = require('../lib/bitmap-header');
+const BitmapTransform = require('../lib/bitmap-transform')
+const invert = require('../lib/invert-colors');
 
 describe('working with bitmaps', () => {
     
@@ -21,6 +23,21 @@ describe('working with bitmaps', () => {
         assert.equal(header.pixelOffset, 1078);
         assert.equal(header.bitsPerPixel, 8);
     })
+    it('test transform', done => {
+        const bitmap = new BitmapTransform(buffer);
+        bitmap.transform(invert);
 
+        fs.writeFile('./test/palette-output.bmp', buffer, (err) => {
+            if (err) done(err);
+            else done();
+        })
+        // const buffer = fs.readFileSync('./test/output.bmp');
+        // assert.deepEqual(bitmap.buffer, buffer);
+        
+        // fs.readFile('./test/output.bmp', (err, buffer) => {
+        //     assert.deepEqual(bitmap.buffer, buffer);
+        //     done();
+        // });
+    });
 
 });
