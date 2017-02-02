@@ -2,18 +2,20 @@
   "name": "bitmap-transformer",
   "version": "1.0.0",
   "description": "",
-  "main": "run.js",
+  "main": "bitmap-header",
   "directories": {
-    "test": "test"
+    "test": "mocha"
   },
   "dependencies": {
-    "buffer": "^5.0.2"
+    "buffer": "^5.0.2",
+    "fs": "0.0.1-security"
   },
   "devDependencies": {
     "mocha": "^3.2.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "test:debug": "mocha --debug-brk"
   },
   "repository": {
     "type": "git",
