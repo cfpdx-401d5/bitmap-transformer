@@ -44,7 +44,7 @@ describe('read the header of a bitmap file', () => {
 describe('transformations to the non-palette bmp', () => {
     it('inverts all the rgb colors of the original bmp', done => {
         const bitmap = new BitmapTransformer(noPaletteBuffer);
-        const bmpBuffer = bitmap.transform(invert);
+        const bmpBuffer = bitmap.transformNoPallet(invert);
 
         // Write the changed buffer/image to a new bitmap file
         bitmap.write('./test/output.bmp', bmpBuffer, (err) => {
@@ -61,16 +61,58 @@ describe('transformations to the non-palette bmp', () => {
 
     it('grayscales all the rgb colors of the original bmp', done => {
         const bitmap = new BitmapTransformer(noPaletteBuffer);
-        const bmpBuffer = bitmap.transform(grayscale);
+        const bmpBuffer = bitmap.transformNoPallet(grayscale);
 
-        bitmap.write('./test/grayscale.bmp', bmpBuffer, (err) => {
+        bitmap.write('./test/grayscaleNoPalette.bmp', bmpBuffer, (err) => {
             if (err) return err;
             // async version
-            fs.readFile('./test/grayscale.bmp', (err, buffer) => {
+            fs.readFile('./test/grayscaleNoPalette.bmp', (err, buffer) => {
                 assert.deepEqual(bmpBuffer, buffer);
                 done();
             });
         });
     });
 
+});
+
+describe('transformations to the paletted bpm', () => {
+    it('read header', () => {
+        const header = new BitmapHeader(paletteBuffer);
+        let output;
+        if (header.isPalette) { output = true; } else { output = false; }
+        assert.equal(output, true);
+        assert.equal(header.fileSize, 11078);
+        assert.equal(header.whereImageStarts, 1078);
+        assert.equal(header.bitsPerPixel, 8);
+    });
+    it('inverts all the rgb colors of the original bmp', done => {
+        const bitmap = new BitmapTransformer(paletteBuffer);
+        const bmpBuffer = bitmap.transformPalette(invert);
+
+        // Write the changed buffer/image to a new bitmap file
+        bitmap.write('./test/outputPalette.bmp', bmpBuffer, (err) => {
+            if (err) return err;
+            else {
+                // Read and assert the new file
+                fs.readFile('./test/outputPalette.bmp', (err, buffer) => {
+                    assert.deepEqual(bmpBuffer, buffer);
+                    done();
+                });
+            }
+        });
+    });
+
+    it('grayscales all the rgb colors of the original bmp', done => {
+        const bitmap = new BitmapTransformer(paletteBuffer);
+        const bmpBuffer = bitmap.transformPalette(grayscale);
+
+        bitmap.write('./test/grayscalePalette.bmp', bmpBuffer, (err) => {
+            if (err) return err;
+            // async version
+            fs.readFile('./test/grayscalePalette.bmp', (err, buffer) => {
+                assert.deepEqual(bmpBuffer, buffer);
+                done();
+            });
+        });
+    });
 });
