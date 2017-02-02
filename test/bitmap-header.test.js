@@ -30,16 +30,24 @@ describe('working with bitmaps', () => {
     });
 
 
-    it('reads the header', () => {
+    it('reads the header for no palette', () => {
         const header = new BitmapHeader(noPalette);
         assert.equal(header.fileSize, 30054);
         assert.equal(header.isPaletted, false);
         assert.equal(header.pixelOffset, 54);
         assert.equal(header.bitsPerPixel, 24);
     });
+
+     it('reads the header for palette', () => {
+        const header = new BitmapHeader(buffer);
+        assert.equal(header.fileSize, 11078);
+        assert.equal(header.isPaletted, true);
+        assert.equal(header.pixelOffset, 1078);
+        assert.equal(header.bitsPerPixel, 8);
+    })
 });
 
-describe('invert transformation', () => {    
+describe('invert transformation for no palette', () => {    
     it('test transform', () => {
         const bitmap = new BitmapTransform(noPalette);
         const invertBuf = bitmap.transform(invert);
@@ -49,9 +57,24 @@ describe('invert transformation', () => {
                     fs.readFile('./test/output.bmp', (err, buffer) => {
                         assert.deepEqual(invertBuf, buffer);
                         done();
-                    })
-                }
-        
+                })
+            }        
+        });
+    });
+});
+
+describe('invert transformation for palette', () => {    
+    it('test transform', () => {
+        const bitmap = new BitmapTransform(palette);
+        const invertBuf = bitmap.transform(invert);
+            bitmap.write('./test/output.bmp', invertBuf, (err) => {
+                if (err) return err;
+                else {
+                    fs.readFile('./test/output.bmp', (err, buffer) => {
+                        assert.deepEqual(invertBuf, buffer);
+                        done();
+                })
+            }
         });
     });
 });
