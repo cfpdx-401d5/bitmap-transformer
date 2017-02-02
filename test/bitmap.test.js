@@ -23,4 +23,16 @@ describe('inverts colors in a bitmap', () => {
     assert.equal(bmHeader.fileSize, 30054);
     assert.equal(bmHeader.isPaletted, false);
   })
+
+  it('transforms the file', done => {
+    var bitMap = new BitmapTransformer(buffer);
+    bitMap.transform();
+    // fs.writeFile('./inverted.bmp', bitMap.buffer, (err) => {
+    //   done(err);
+    // })
+    fs.readFile('./inverted.bmp', (err, buffer) =>{
+      assert.deepEqual(bitMap.buffer, buffer);
+      done(err);
+    });
+  });
 });
