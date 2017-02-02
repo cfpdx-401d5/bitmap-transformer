@@ -67,14 +67,14 @@ describe('invert transformation for palette', () => {
     it('test transform', () => {
         const bitmap = new BitmapTransform(palette);
         const invertBuf = bitmap.transform(invert);
-            bitmap.write('./test/output.bmp', invertBuf, (err) => {
+            bitmap.write('./test/Palette-output.bmp', invertBuf, (err) => {
                 if (err) return err;
                 else {
-                    fs.readFile('./test/output.bmp', (err, buffer) => {
+                    fs.readFile('./test/Palette-output.bmp', (err, buffer) => {
                         assert.deepEqual(invertBuf, buffer);
                         done();
                 })
             }
         });
     });
-});
+});          
