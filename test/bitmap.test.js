@@ -23,6 +23,18 @@ describe('inverts colors in a bitmap', () => {
     assert.equal(bmHeader.fileSize, 30054);
     assert.equal(bmHeader.isPaletted, false);
   })
+  
+  it('checks the invert function', () => {
+    const bitMap = new BitmapTransformer(buffer);
+    const color = {
+      r: 155,
+      g: 155,
+      b: 155,
+    }
+    const newColor = bitMap.invert(color);
+    assert.deepEqual(newColor, {r: 100, g: 100, b: 100});
+  });
+
 
   it('transforms the file', done => {
     var bitMap = new BitmapTransformer(buffer);
