@@ -35,14 +35,12 @@ describe('bitmap file :', () => {
 
 		fs.writeFile('./test/modifiedBitmap.bmp', bitmap.buffer, err => {
 			if (err) return done(err);
-			done();
-		});	
-
-		// the 'Golden Chicken'
-		// fs.readFile('./test/modifiedBitmap.bmp', (err, buffer) => {
-		// 	assert.deepEqual(bitmap.buffer, buffer);
-		// 	done();
-		// });
+			fs.readFile('./test/modifiedBitmap.bmp', (err, buffer) => {
+				assert.deepEqual(bitmap.buffer, buffer);
+				done();
+			});
+		
+		});
 	});
 });
 
