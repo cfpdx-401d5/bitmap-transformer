@@ -39,9 +39,9 @@ describe('working with bitmaps', () => {
     });
 
      it('reads the header for palette', () => {
-        const header = new BitmapHeader(buffer);
+        const header = new BitmapHeader(palette);
         assert.equal(header.fileSize, 11078);
-        assert.equal(header.isPaletted, true);
+        assert.equal(header.isPaletted, 256);
         assert.equal(header.pixelOffset, 1078);
         assert.equal(header.bitsPerPixel, 8);
     })
