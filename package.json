@@ -1,0 +1,34 @@
+{
+    "name": "bitmap-transformer",
+    "version": "1.0.0",
+    "description": "Given a bitmap image, transform the appearance of the image by manipulating the colors. Then it will write out the new image to a new file.",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "dependencies": {
+
+    },
+    "devDependencies": {},
+    "chai": "^3.5.0",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/krogseng/bitmap-transformer.git"
+    },
+    "keywords": [
+        "bitmap",
+        "transform",
+        "lab",
+        "codefellows",
+        "401"
+    ],
+    "author": "Lynn Krogseng",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/krogseng/bitmap-transformer/issues"
+    },
+    "homepage": "https://github.com/krogseng/bitmap-transformer#readme"
+}
