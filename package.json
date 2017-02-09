@@ -1,0 +1,30 @@
+{
+  "name": "bitmap-transformer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bitmap-header",
+  "directories": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "buffer": "^5.0.2",
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "test:debug": "mocha --debug-brk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clairefollett/bitmap-transformer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clairefollett/bitmap-transformer/issues"
+  },
+  "homepage": "https://github.com/Clairefollett/bitmap-transformer#readme"
+}
